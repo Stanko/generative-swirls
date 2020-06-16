@@ -1,0 +1,28 @@
+{
+  "name": "generative-init",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel ./src/index.html",
+    "node": "parcel --target node --bundle-node-modules ./src/js/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stanko/generative-init.git"
+  },
+  "author": "Stanko",
+  "license": "All rights reserved",
+  "bugs": {
+    "url": "https://github.com/Stanko/generative-init/issues"
+  },
+  "homepage": "https://github.com/Stanko/generative-init#readme",
+  "dependencies": {
+    "generative-utils": "git://github.com/Stanko/generative-utils.git#master",
+    "hsluv": "^0.1.0",
+    "node-sass": "^4.13.1",
+    "p5": "^0.10.2",
+    "parcel-bundler": "^1.12.4",
+    "seedrandom": "^3.0.5"
+  }
+}
