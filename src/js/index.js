@@ -56,23 +56,40 @@ function changeColor(h, s, l) {
   return [h, s, l];
 }
 
+function generatePolygon(n, r, center) {
+  const polygon = [];
+  const angle = Math.PI * 2 / n;
+
+  for (let i = 0; i < n; i++) {
+    polygon.push({
+      x: center.x + r * Math.cos(angle * i),
+      y: center.y + r * Math.sin(angle * i),
+    });
+  }
+
+  return polygon;
+}
+
 function prepare(center = { x: 750, y: 750 }) {
   background(240);
   noStroke();
 
   const particles = [];
 
-  polygon = generateConvexPolygon(Math.round(random(4, 14)), 100, center);
+  const direction = random() > 0.5 ? -2 : 2;
+
+  polygon = generatePolygon(6, 30, center);
 
   polygon.forEach((p, index) => {
     let color = colors[Math.round(random(0, colors.length - 1))];
     color = changeColor(...color);
 
-    for (let i = 0; i < 1; i += 0.2) {
+    for (let i = 0; i < 1; i += random(0.1, 0.3)) {
       const p2 = polygon[(index + 1) % polygon.length];
       const position = getPointOnLine(p, p2, i);
       // -2 looks nice, leaves a hole in the middle
-      const direction = random() > 0.5 ? -2 : 2;
+      // const direction = random() > 0.5 ? -2 : 2;
+      // const direction = -2;
 
       const angle = getVectorAngle({
         x: p2.x - p.x,
@@ -83,7 +100,7 @@ function prepare(center = { x: 750, y: 750 }) {
         position,
         angle,
         color,
-        random(10, 250),
+        random(30, 40),
       ));
     }
   });
@@ -147,11 +164,25 @@ if (typeof window === 'undefined') {
   fs.writeSync(file, `</g>\n</svg>`);
 } else {
   window.setup = function() {
-    particles.push(prepare());
-    particles.push(prepare({ x: random(300, 500), y: random(300, 500) }));
-    particles.push(prepare({ x: random(1000, 1200), y: random(1000, 1200) }));
-    particles.push(prepare({ x: random(300, 500), y: random(1000, 1200) }));
-    particles.push(prepare({ x: random(1000, 1200), y: random(300, 500) }));
+    const count = 15;
+    const step = w / count;
+    for (let x = 1; x < count - 1; x++) {
+      for (let y = 1; y < count - 1; y++) {
+        if (Math.random() > 0.6) {
+          continue;
+        }
+        const offset = y % 2 === 0 ? step / 2 : step;
+        particles.push(prepare({ 
+          x: offset + x * step + random(-step * 0.3, step * 0.3), 
+          y: step / 2 + y * step + random(-step * 0.3, step * 0.3),
+        }));
+      } 
+    }
+    // particles.push(prepare());
+    // particles.push(prepare({ x: random(300, 500), y: random(300, 500) }));
+    // particles.push(prepare({ x: random(1000, 1200), y: random(1000, 1200) }));
+    // particles.push(prepare({ x: random(300, 500), y: random(1000, 1200) }));
+    // particles.push(prepare({ x: random(1000, 1200), y: random(300, 500) }));
     
     createCanvas(w, h);
     background('#1a2e3e');
