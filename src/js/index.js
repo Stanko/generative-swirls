@@ -56,7 +56,7 @@ function changeColor(h, s, l) {
   return [h, s, l];
 }
 
-function prepare(center = { x: 750, y: 750 }) {
+function prepare(center = { x: w / 2, y: h / 2 }) {
   background(240);
   noStroke();
 
@@ -68,7 +68,7 @@ function prepare(center = { x: 750, y: 750 }) {
     let color = colors[Math.round(random(0, colors.length - 1))];
     color = changeColor(...color);
 
-    for (let i = 0; i < 1; i += 0.2) {
+    for (let i = 0; i < 1; i += random(0.25, 0.5)) {
       const p2 = polygon[(index + 1) % polygon.length];
       const position = getPointOnLine(p, p2, i);
       // -2 looks nice, leaves a hole in the middle
@@ -83,7 +83,7 @@ function prepare(center = { x: 750, y: 750 }) {
         position,
         angle,
         color,
-        random(10, 250),
+        random(10, 200),
       ));
     }
   });
@@ -147,11 +147,15 @@ if (typeof window === 'undefined') {
   fs.writeSync(file, `</g>\n</svg>`);
 } else {
   window.setup = function() {
-    particles.push(prepare());
-    particles.push(prepare({ x: random(300, 500), y: random(300, 500) }));
-    particles.push(prepare({ x: random(1000, 1200), y: random(1000, 1200) }));
-    particles.push(prepare({ x: random(300, 500), y: random(1000, 1200) }));
-    particles.push(prepare({ x: random(1000, 1200), y: random(300, 500) }));
+    const a0 = () => random(w * 0.45, w * 0.55);
+    const a1 = () => random(w * 0.2, w * 0.5);
+    const a2 = () => random(w * 0.5, w * 0.8);
+
+    particles.push(prepare({ x: a0(), y: a0() }));
+    particles.push(prepare({ x: a1(), y: a1() }));
+    particles.push(prepare({ x: a2(), y: a2() }));
+    particles.push(prepare({ x: a1(), y: a2() }));
+    particles.push(prepare({ x: a2(), y: a1() }));
     
     createCanvas(w, h);
     background('#1a2e3e');
