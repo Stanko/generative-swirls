@@ -1,7 +1,5 @@
 let fs;
 
-import colors from './colors';
-
 const isNode = typeof window === 'undefined';
 const isBrowser = !isNode;
 
@@ -16,7 +14,6 @@ import Particle from './particle';
 import { generateConvexPolygon, drawPolygon } from '../../../generative-utils/polygons'
 import { getPointOnLine } from '../../../generative-utils/points';
 import { getVectorAngle } from '../../../generative-utils/vectors';
-import { scalePolygon } from '../../../generative-utils/polygons/scale-polygon'
 
 let seed = 'seed';
 
@@ -44,17 +41,6 @@ const h = 1500;
 let particles = [];
 let polygon;
 
-function changeColor(h, s, l) {
-  h = h + random(-3, 3) % 360;
-  s = s + random(-2, 2) % 100;
-  l = l + random(-2, 2) % 100;
-
-  h = h < 0 ? 0 : h;
-  s = s < 0 ? 0 : s;
-  l = l < 0 ? 0 : l;
-
-  return [h, s, l];
-}
 
 function prepare(center = { x: 750, y: 750 }) {
   background(240);
@@ -65,10 +51,11 @@ function prepare(center = { x: 750, y: 750 }) {
   polygon = generateConvexPolygon(Math.round(random(4, 14)), 100, center);
 
   polygon.forEach((p, index) => {
-    let color = colors[Math.round(random(0, colors.length - 1))];
-    color = changeColor(...color);
+    let color = Math.round(random(30, 240));
+    color = `#${ color.toString(16) }${ color.toString(16) }${ color.toString(16) }`
+    fill(color);
 
-    for (let i = 0; i < 1; i += 0.2) {
+    for (let i = 0; i < 1; i += 0.1) {
       const p2 = polygon[(index + 1) % polygon.length];
       const position = getPointOnLine(p, p2, i);
       // -2 looks nice, leaves a hole in the middle
@@ -83,7 +70,7 @@ function prepare(center = { x: 750, y: 750 }) {
         position,
         angle,
         color,
-        random(10, 250),
+        random(100, 250),
       ));
     }
   });
@@ -148,13 +135,13 @@ if (typeof window === 'undefined') {
 } else {
   window.setup = function() {
     particles.push(prepare());
-    particles.push(prepare({ x: random(300, 500), y: random(300, 500) }));
-    particles.push(prepare({ x: random(1000, 1200), y: random(1000, 1200) }));
-    particles.push(prepare({ x: random(300, 500), y: random(1000, 1200) }));
-    particles.push(prepare({ x: random(1000, 1200), y: random(300, 500) }));
+    // particles.push(prepare({ x: random(300, 500), y: random(300, 500) }));
+    // particles.push(prepare({ x: random(1000, 1200), y: random(1000, 1200) }));
+    // particles.push(prepare({ x: random(300, 500), y: random(1000, 1200) }));
+    // particles.push(prepare({ x: random(1000, 1200), y: random(300, 500) }));
     
     createCanvas(w, h);
-    background('#1a2e3e');
+    background('white');
     // background(255);
   };
 
