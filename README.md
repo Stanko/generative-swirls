@@ -1,6 +1,6 @@
 # Swirls (for Lukas)
 
-https://muffinman.io/generative-swirls
+https://muffinman.io/generative-swirls/
 
 Simple generative swirls in p5. It started as <a href="https://www.instagram.com/p/CAtFiqjHVqn/">a simple exploration</a>, which I lost code for. But my friend really liked it, so I went back and recreated it for him to play with.
 
