@@ -92,6 +92,9 @@ canvas {
 .knobs {
   font-size: 14px;
   padding: 0 2vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
 
   .knob,
   .knob > label {
@@ -170,7 +173,9 @@ button {
   font-size: 14px;
   border: none;
   border-radius: 4px;
-  margin-left: 2vw;
+  margin: 0 auto 10px;
+  position: relative;
+  display: block;
   color: #111;
 
   &:active {
