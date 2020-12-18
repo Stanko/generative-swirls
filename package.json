@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel ./src/index.html",
-    "build": "rm -rf ./public && parcel build ./src/index.html --out-dir public"
+    "build": "rm -rf ./public && parcel build ./src/index.html --out-dir docs --public-url /generative-swirls"
   },
   "repository": {
     "type": "git",
