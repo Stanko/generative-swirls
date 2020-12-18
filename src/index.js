@@ -1,4 +1,3 @@
-// import { IS_BROWSER, IS_NODE } from './constants/env';
 import knobs, { randomize } from './knobs';
 import drawing from './drawing/index'
 

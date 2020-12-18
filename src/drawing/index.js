@@ -6,6 +6,7 @@ import { getVectorAngle } from '../../../generative-utils/vectors';
 import Particle from './particle';
 import seedrandom from 'seedrandom';
 import random from '../utils/random';
+import { saveAs } from 'file-saver';
 
 let sketchInstance;
 
@@ -13,8 +14,14 @@ const sketchWrapperElement = document.querySelector('.sketch');
 const svgSketchWrapperElement = document.querySelector('.svg-sketch');
 
 // Add SVG
-svgSketchWrapperElement.innerHTML = '<span>SVG</span><svg class="svg"></svg>';
 const svgElement = document.querySelector('.svg');
+const svgDownloadButton = document.querySelector('.svg-download');
+
+svgDownloadButton.addEventListener('click', () => {
+  const name =
+  'swirl-' + window.location.hash.replace("#/", "").replace(/\//g, "-") + ".svg";
+  saveAs(`data:application/octet-stream;base64,${btoa(svgElement.outerHTML)}`, name);
+});
 
 let polygon;
 

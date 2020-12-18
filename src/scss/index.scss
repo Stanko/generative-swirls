@@ -72,9 +72,12 @@ canvas {
 
 .svg-sketch span {
   display: block;
-  margin-bottom: 5px;
   font-size: 12px;
   font-weight: bold;
+}
+
+.svg-download {
+  margin: 8px 0;
 }
 
 @mixin knob-focus {
@@ -135,39 +138,40 @@ canvas {
     display: inline-flex;
     align-items: center;
   }
+}
 
-  button {
-    @include knob-focus;
-    padding: 0 5px;
-    font-size: 16px;
-    border: none;
-    background: none;
-    border-radius: 4px;
-    color: #777;
+button {
+  @include knob-focus;
+  padding: 0 5px;
+  font-size: 16px;
+  border: none;
+  background: none;
+  border-radius: 4px;
+  color: #777;
+  cursor: pointer;
 
-    &:hover {
-      opacity: 1;
-      color: #000;
-    }
+  &:hover {
+    opacity: 1;
+    color: #111;
+  }
 
-    &:active {
-      transform: translateY(1px);
-    }
+  &:active {
+    transform: translateY(1px);
+  }
 
-    &:focus {
-      color: #000;
-    }
+  &:focus {
+    color: #111;
   }
 }
 
 .randomize {
   @include knob-focus;
-  padding: 3px 10px;
   background: none;
   font-size: 14px;
   border: none;
   border-radius: 4px;
   margin-left: 2vw;
+  color: #111;
 
   &:active {
     transform: translateY(1px);
