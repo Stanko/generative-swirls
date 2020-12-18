@@ -19,7 +19,7 @@ const svgElement = document.querySelector('.svg');
 let polygon;
 
 function getColor(rng, startColor, colorRange) {
-  return `hsl(${ random(startColor, startColor + colorRange, rng, 0) }, ${ random(50, 80, rng, 0) }%, ${ random(30, 80, rng, 0) }%)`;
+  return `hsl(${ random(startColor, startColor + colorRange, rng, 0) }, ${ random(60, 90, rng, 0) }%, ${ random(30, 80, rng, 0) }%)`;
 }
 
 function prepare(options) {
@@ -61,14 +61,14 @@ function prepare(options) {
         position,
         angle,
         color,
-        length: p5.random(options.minLength, options.maxLength),
-        size: p5.random(options.minStartingSize, options.maxStartingSize),
-        speed: p5.random(2, 3),
+        length: random(options.minLength, options.maxLength, null, 0),
+        size: random(options.minStartingSize, options.maxStartingSize),
+        speed: random(2, 3),
       }));
     }
   });
   
-  return particles;
+  return p5.shuffle(particles);
 }
 
 export default function drawing(options) {
@@ -109,8 +109,6 @@ export default function drawing(options) {
     p5.setup = () => {
       p5.createCanvas(width, height);
   
-      p5.background(255);
-
       particles = prepare(options);
     };
   
@@ -119,18 +117,21 @@ export default function drawing(options) {
       p5.noStroke();
 
       if (p5.frameCount > options.maxLength) {
+        particles.forEach(p => {
+          svgContent += p.draw(true);
+        });
+        
         p5.noLoop();
-        console.log(svgContent)
 
         if (renderSvg) {
           svgElement.innerHTML = svgContent;
         }
+      } else {
+        particles.forEach(p => {
+          svgContent += p.draw();
+          p.move();
+        });
       }
-
-      particles.forEach(p => {
-        svgContent += p.draw();
-        p.move();
-      });
     };
   }, sketchWrapperElement);
 }

@@ -2,7 +2,7 @@ class Particle {
   constructor({
     position, 
     angle = Math.PI * 0.3,
-    color = '#25608e',
+    color = '#667788',
     length = 200,
     size = 5,
     seed = p5.random(0, 9999),
@@ -17,29 +17,29 @@ class Particle {
     this.seed = seed;
     this.speed = speed;
     this.counter = 0;
-    this.length = length;
+    this.length = Math.round(length);
     this.color = color;
     this.originalColor = color;
+
+    
+    if (typeof this.color === 'number') {
+      this.color = `#${ this.color.toString(16) }${ this.color.toString(16) }${ this.color.toString(16) }`;
+    }
 
     this.sizeStep = p5.random(0.2, 0.4);
 
     this.done = false;
   }
   
-  draw() {
-    if (this.done) {
-      return '';
-    }
-    
+  draw(isLastStep) {
     p5.fill(this.color);
-
     p5.circle(this.position.x, this.position.y, this.size);
 
-    let color = this.color;
-    if (typeof color === 'number') {
-      color = `#${ color.toString(16) }${ color.toString(16) }${ color.toString(16) }`;
+    if (isLastStep || !this.done) {
+      return `<circle cx="${ this.position.x.toFixed(1) }" cy="${ this.position.y.toFixed(1) }" r="${ this.size / 2 }" fill="${ this.color }" />`
     }
-    return `<circle cx="${ this.position.x }" cy="${ this.position.y }" r="${ this.size / 2 }" fill="${ color }" />`
+
+    return '';
   }
 
   move() {
@@ -56,8 +56,6 @@ class Particle {
 
     this.position.x += Math.cos(angle) * movement; 
     this.position.y += Math.sin(angle) * movement; 
-    // this.position.x += Math.cos(angle) * this.speed
-    // this.position.y += Math.sin(angle) * this.speed
 
     this.size += (p5.noise((this.seed + this.counter) / 60) * 1.2) - 0.5;
   }

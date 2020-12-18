@@ -27,7 +27,7 @@ const KNOBS = [
     name: 'colorRange',
     type: knobTypes.RANGE,
     min: 5,
-    max: 100,
+    max: 300,
     step: 5,
     default: 30,
   },
