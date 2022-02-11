@@ -20,7 +20,7 @@
   "dependencies": {
     "file-saver": "^2.0.5",
     "generative-utils": "git://github.com/Stanko/generative-utils.git#master",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "p5": "^0.10.2",
     "parcel-bundler": "^1.12.4",
     "random-words": "^1.1.1",
