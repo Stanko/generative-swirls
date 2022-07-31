@@ -20,9 +20,7 @@
   "dependencies": {
     "generative-utils": "git://github.com/Stanko/generative-utils.git#master",
     "hsluv": "^0.1.0",
-    "node-sass": "^4.13.1",
     "p5": "^0.10.2",
-    "parcel-bundler": "^1.12.4",
     "seedrandom": "^3.0.5"
   }
 }
