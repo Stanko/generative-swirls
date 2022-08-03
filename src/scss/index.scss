@@ -3,10 +3,23 @@
   padding: 0;
 }
 
+html {
+  height: 100%;
+}
+
+body {
+  background: #090d12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
 canvas {
   display: block;
-  height: 100vh !important;
-  width: auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
 }
 
 .reload {
