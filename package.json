@@ -19,10 +19,12 @@
   "dependencies": {
     "file-saver": "^2.0.5",
     "generative-utils": "git://github.com/Stanko/generative-utils.git#master",
+    "js-angusj-clipper": "^1.2.1",
     "p5": "^1.4.2",
     "parcel": "^2.7.0",
     "random-words": "^1.2.0",
-    "seedrandom": "^3.0.5"
+    "seedrandom": "^3.0.5",
+    "simplify-js": "^1.2.4"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.7.0"
